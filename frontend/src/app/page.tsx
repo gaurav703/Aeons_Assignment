@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     // Check if the user is authenticated
-    const isAuthenticated: any = localStorage.getItem("authToken"); // Example: check for an auth token in localStorage
+    const isAuthenticated = localStorage.getItem("token"); // Example: check for an auth token in localStorage
 
     if (isAuthenticated) {
       // If authenticated, redirect to login

@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,37 +22,28 @@ export default function Login() {
 
     // login
     try {
-      const res = await fetch(
-        "https://devmeets-backend.vercel.app/api/users/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const res = await axios.post("http://localhost:5000/api/users/login", {
+        email,
+        password,
+      });
 
-      const data = await res.json();
+      console.log(res);
 
-      if (!res.ok) {
-        alert(data.message);
-        return;
+      if (!res.data.success) {
+        alert(res.data.message);
       }
 
       // Store token and userId in localStorage or sessionStorage based on rememberMe
       if (rememberMe) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", JSON.stringify(data.userId));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", JSON.stringify(res.data.userId));
         console.log("Token and userId stored in localStorage");
       } else {
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("userId", JSON.stringify(data.userId));
+        sessionStorage.setItem("token", res.data.token);
+        sessionStorage.setItem("userId", JSON.stringify(res.data.userId));
         console.log("Token and userId stored in sessionStorage");
       }
-
-      console.log(data);
-      router.push("/");
+      router.push("/home");
     } catch (error) {
       console.log(error);
     }
@@ -59,8 +51,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      {" "}
-      {/* Changed background to a grey shade */}
       <div className="w-full max-w-full sm:max-w-md p-6 sm:p-8 space-y-6 bg-white rounded-lg shadow-2xl mt-20 sm:mt-24">
         <h2 className="text-xl sm:text-2xl font-bold text-center text-indigo-600">
           Log in to Task Manager
@@ -105,8 +95,8 @@ export default function Login() {
               <input
                 type="checkbox"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                checked={rememberMe} // Bind checked state
-                onChange={() => setRememberMe(!rememberMe)} // Toggle state on click
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
               />
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>

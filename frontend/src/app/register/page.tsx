@@ -24,15 +24,15 @@ export default function Register() {
     // Registration logic here (e.g., API call using Axios)
     try {
       const response: any = await axios.post(
-        "https://devmeets-backend.vercel.app/api/users/signup",
+        "http://localhost:5000/api/users/signup",
         {
           email,
           username,
           password,
-          firstName: username, // Adjust as needed
-          lastName: "kamble", // You might want to get this from a user input
         }
       );
+
+      console.log(response);
 
       router.push("/login");
       alert("Registration successful. Please log in.");
