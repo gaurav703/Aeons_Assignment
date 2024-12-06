@@ -41,8 +41,6 @@ const validateSignupData = async (req, res) => {
 // Signup controller
 const signup = async (req, res) => {
     try {
-      
-        
     const { username, password, email } = req.body;
 
     // Validate Inputs
@@ -114,7 +112,6 @@ const login = async (req, res) => {
 
 const requireAuth = (req, res) => {
   const { token } = req.body;
-
   if (token) {
     try {
       const decode = jwt.verify(token, "secret");

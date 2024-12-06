@@ -93,12 +93,12 @@ export default function Main() {
         }
       );
       console.log("repsonse---------", resp);
-      //
       fetchTasks(userid);
+      console.log("Task status toggled successfully.");
     } catch (error) {
       console.error("Error toggling task status:", error);
     }
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
