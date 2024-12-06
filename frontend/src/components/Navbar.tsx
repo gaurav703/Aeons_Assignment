@@ -29,7 +29,7 @@ const Navbar = () => {
 
     if (isAuthenticated || isAuthenticated1) {
       axios
-        .get("http://localhost:5000/api/users/" + cleanUserID)
+        .get("https://backend-gilt-gamma.vercel.app/api/users/" + cleanUserID)
         .then((response) => {
           console.log("response====", response.data);
           setUserName(response.data.username);
@@ -67,14 +67,17 @@ const Navbar = () => {
 
     try {
       // Send a POST request to the backend API
-      const response = await axios.post("http://localhost:5000/api/tasks", {
-        title: formData.get("title"),
-        description: formData.get("description"),
-        status: formData.get("status"),
-        priority: formData.get("priority"),
-        dueDate: formData.get("dueDate"),
-        userid: cleanUserID,
-      });
+      const response = await axios.post(
+        "https://backend-gilt-gamma.vercel.app/api/tasks",
+        {
+          title: formData.get("title"),
+          description: formData.get("description"),
+          status: formData.get("status"),
+          priority: formData.get("priority"),
+          dueDate: formData.get("dueDate"),
+          userid: cleanUserID,
+        }
+      );
 
       console.log("Task added successfully:", response.data);
 

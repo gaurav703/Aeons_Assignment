@@ -71,7 +71,7 @@ export default function Main() {
     const fetchTasks = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:5000/api/tasks/user/" + cleanUserID
+          "https://backend-gilt-gamma.vercel.app/api/tasks/user/" + cleanUserID
         );
         setTaskList(resp.data);
         console.log(resp.data);
@@ -86,11 +86,14 @@ export default function Main() {
   const toggleTaskStatus = (taskId: any) => {
     try {
       console.log(taskId);
-      const resp = axios.put("http://localhost:5000/api/tasks/" + taskId, {
-        status: "Completed",
-      });
-      console.log(resp);
-      window.location.reload();
+      const resp = axios.put(
+        "https://backend-gilt-gamma.vercel.app/api/tasks/" + taskId,
+        {
+          status: "Completed",
+        }
+      );
+      console.log("repsonse---------", resp);
+      // window.location.reload();
     } catch (error) {
       console.error("Error toggling task status:", error);
     }

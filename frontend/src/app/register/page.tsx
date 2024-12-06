@@ -24,7 +24,7 @@ export default function Register() {
     // Registration logic here (e.g., API call using Axios)
     try {
       const response: any = await axios.post(
-        "http://localhost:5000/api/users/signup",
+        "https://backend-gilt-gamma.vercel.app/api/users/signup",
         {
           email,
           username,

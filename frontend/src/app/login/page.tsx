@@ -22,10 +22,13 @@ export default function Login() {
 
     // login
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://backend-gilt-gamma.vercel.app/api/users/login",
+        {
+          email,
+          password,
+        }
+      );
 
       console.log(res);
 
