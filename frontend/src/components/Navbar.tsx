@@ -63,7 +63,7 @@ const Navbar = () => {
     const cleanUserID = userID.slice(1, -1);
     console.log("cleanUserID====", cleanUserID);
     // Collect form data
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target as HTMLFormElement);
 
     try {
       // Send a POST request to the backend API

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useState, useEffect } from "react";
@@ -57,7 +58,7 @@ export default function Main() {
   const toggleModal = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    const userId =
+    const userId: any =
       localStorage.getItem("userId") || sessionStorage.getItem("userId");
 
     if (!userId) {
@@ -111,7 +112,7 @@ export default function Main() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
-              {taskList.map((task) => (
+              {taskList.map((task: any) => (
                 <div
                   key={task._id}
                   className="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105"
