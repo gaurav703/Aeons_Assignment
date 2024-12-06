@@ -94,10 +94,11 @@ export default function Main() {
         }
       );
       console.log("repsonse---------", resp);
-      // window.location.reload();
+      //
     } catch (error) {
       console.error("Error toggling task status:", error);
     }
+    window.location.reload();
   };
 
   return (
