@@ -51,11 +51,22 @@ const tasks = [
 
 export default function Main() {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [taskList, setTaskList] = useState([]);
+  const [userid, setUserId] = useState();
   const router = useRouter();
 
   const toggleModal = () => setIsOpen(!isOpen);
+  const fetchTasks = async (cleanUserID: any) => {
+    try {
+      const resp = await axios.get(
+        "https://backend-gilt-gamma.vercel.app/api/tasks/user/" + cleanUserID
+      );
+      setTaskList(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
 
   useEffect(() => {
     const userId: any =
@@ -67,21 +78,9 @@ export default function Main() {
 
     const cleanUserID = userId.slice(1, -1);
     console.log("cleanUserID====", cleanUserID);
+    setUserId(cleanUserID);
     // Collect form data
-
-    const fetchTasks = async () => {
-      try {
-        const resp = await axios.get(
-          "https://backend-gilt-gamma.vercel.app/api/tasks/user/" + cleanUserID
-        );
-        setTaskList(resp.data);
-        console.log(resp.data);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      }
-    };
-
-    fetchTasks();
+    fetchTasks(cleanUserID);
   }, []);
 
   const toggleTaskStatus = (taskId: any) => {
@@ -95,6 +94,7 @@ export default function Main() {
       );
       console.log("repsonse---------", resp);
       //
+      fetchTasks(userid);
     } catch (error) {
       console.error("Error toggling task status:", error);
     }
